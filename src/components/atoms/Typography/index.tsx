@@ -92,7 +92,7 @@ const Typography = (props: IProps) => {
             'secondary-l': 'text-secondary-l',
             'secondary-m': 'text-secondary-m',
             'secondary-d': 'text-secondary-d',
-            'error': 'text-error',
+            'error-m': 'text-error-m',
             'success': 'text-success',
             'warning': 'text-warning',
             'info': 'text-info'

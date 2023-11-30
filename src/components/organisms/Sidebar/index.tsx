@@ -2,14 +2,16 @@
 import NavItem from './../../molecules/NavItem/index';
 import logo from './../../../assets/images/logo.png';
 import { NavLink } from 'react-router-dom';
+import Typography from '../../atoms/Typography';
 
 function Sidebar() {
 
     return (
         <div className="align-start justify-between flex flex-col h-[583px]">
             <div className="flex flex-col gap-16">
-                <div className="flex justify-center items-center self-stretch gap-6">
-                    <img style={{ width: 128, height: 70 }} src={logo} alt="logo" />
+                <div className="flex justify-between items-center self-stretch gap-6">
+                    <img style={{ width: 32, height: 32 }} src={logo} alt="logo" />
+                    <Typography color='gray-500' className='' variant='h6' tag='h6' >RALLY DA SORTE</Typography>
                 </div>
                 <div>
                     <ul className="flex align-start flex-col gap-6 self-stretch w-[128px]">
@@ -21,6 +23,46 @@ function Sidebar() {
                             )}
 
                         </NavLink>
+                        <NavLink
+                            to="/comprar"
+                        >
+                            {({ isActive }) => (
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='shopping_cart'>Comprar Carros</NavItem>
+                            )}
+
+                        </NavLink>
+                        <NavLink
+                            to="/jogar"
+                        >
+                            {({ isActive }) => (
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='game'>Jogar</NavItem>
+                            )}
+
+                        </NavLink>
+                        <NavLink
+                            to="/retirada"
+                        >
+                            {({ isActive }) => (
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='cashout'>Retirada</NavItem>
+                            )}
+
+                        </NavLink>
+                        <NavLink
+                            to="/historico"
+                        >
+                            {({ isActive }) => (       
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='book'>Histórico</NavItem>
+                            )}
+
+                        </NavLink>
+                        <NavLink
+                            to="/configuracoes"
+                        >
+                            {({ isActive }) => (
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='cogs'>Configurações</NavItem>
+                            )}
+
+                        </NavLink>
                     </ul>
                 </div>
             </div>
@@ -29,7 +71,7 @@ function Sidebar() {
                     onClick={() => localStorage.removeItem('auth')}
                     to="/login"
                 >
-                    <NavItem color='error' icon='logout'>Sair</NavItem>
+                    <NavItem color='error-m' icon='logout'>Sair</NavItem>
                 </NavLink>
 
             </div>
