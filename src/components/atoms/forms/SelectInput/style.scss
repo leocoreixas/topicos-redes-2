@@ -1,0 +1,92 @@
+@import '../../../../styles/colors', '../../../../styles/formats', '../../../../styles/typography';
+
+.select-input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    position: relative;
+    
+    .react-select {
+        .select {
+            &__control {
+                min-height: 44px;
+                cursor: pointer;
+                box-shadow: none !important;
+                border: 1px solid $color-text-400;
+                border-radius: 8px;
+            }
+            &__control--is-focused {
+                border-color: $color-brand-secondary-medium;
+            }
+            &__indicator-separator {
+                display: none;
+            }
+
+            &__input-container, &__single-value, &__placeholder {
+                font: 400 14px $font-families-reading;
+                color: $color-text-900;
+            }
+
+            &__placeholder {
+                color: $color-aliases-plataforma-border;
+            }
+
+            &__control--is-disabled {
+                border-color: $color-aliases-plataforma-border;
+                background-color: transparent;
+
+                .select__dropdown-indicator {
+                    svg path {
+                        fill: $color-aliases-plataforma-border;
+                    }
+                }
+            }
+            &__multi-value__remove {
+                svg path {
+                    fill: $color-base-white;
+                }
+            }
+        }
+    }
+
+    label {
+        color: $color-text-900;
+        text-align: left;
+        font: 400 13px $font-families-reading;
+    }
+
+    .select--is-disabled + label {
+        color: $color-aliases-plataforma-border;
+    }
+
+    &.invalid {
+        label {
+            color: $color-feedback-error-base;
+        }
+        .react-select {
+            .select {
+                &__control {
+                    border-color: $color-feedback-error-base;
+                }
+            }
+        }
+    }
+
+    &.filled {
+        label {
+            color: $color-aliases-plataforma-textdefault;
+        }
+        .react-select {
+            .select {
+                &__control {
+                    border-color: $color-aliases-plataforma-textdefault;
+                }
+            }
+        }
+    }
+}
+
+.select__option {
+    font: 400 14px $font-families-reading;
+    color: $color-text-900;
+}

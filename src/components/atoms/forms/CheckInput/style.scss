@@ -1,0 +1,161 @@
+@import '../../../../styles/colors', '../../../../styles/formats';
+
+.check-input-container {
+    display: flex;
+    align-items: center;
+
+    input {
+        appearance: none;
+        cursor: pointer;
+        transition: .2s;
+        position: relative;
+
+        &[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            border-radius: 2px;
+            border: 2px solid $color-text-300;
+            background-repeat: no-repeat;
+            background-position: 50%;
+
+            &:checked {
+                background-image: url("data:image/svg+xml;charset=utf8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9.5 7.5'%3e%3cpolyline points='0.75 4.35 4.18 6.75 8.75 0.75' style='fill:none;stroke:%23fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px'/%3e%3c/svg%3e");
+            }
+        }
+
+        &[type="radio"] {
+            width: 32px;
+            height: 32px;
+            border-radius: $border-radius-circular;
+            border: 1px solid $color-base-black;
+            background: transparent !important;
+
+            &:before {
+                content: '';
+                width: 24px;
+                height: 24px;
+                display: block;
+                border-radius: $border-radius-circular;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background: transparent;
+
+                transition: .2s;
+            }
+
+            &:checked {
+                &:before {
+                    background: $color-brand-secondary-medium;
+                }
+            }
+        }
+        // &:checked {
+        //     background-color: $color-brand-secondary-medium;
+        //     border-color: $color-brand-secondary-medium;
+
+        //     &:before {
+        //         background: $color-brand-secondary-medium;
+        //     }
+        //     &:hover {
+        //         background-color: $color-brand-secondary-medium;
+        //         border-color: $color-brand-secondary-medium !important;
+
+        //         &:before {
+        //             background: $color-brand-secondary-medium;
+        //         }
+        //     }
+        //     &:focus {
+        //         border-color: $color-brand-secondary-medium;
+        //     }
+            
+        //     &:disabled {
+        //         border-color: $color-text-100;
+        //         background-color: $color-text-100;
+
+        //         &:before {
+        //             background: $color-text-100;
+        //         }
+        //     }
+        // }
+
+
+        &:hover {
+            border-color: $color-brand-secondary-medium;
+        }
+        &:focus {
+            border-color: $color-text-900;
+        }
+        &:disabled {
+            border-color: $color-text-100 !important;
+            &:hover {
+                border-color: $color-text-100 !important;
+            }
+        }
+    }
+
+
+    &.switch input {
+        width: 50px;
+        height: 30px;
+        border-radius: 8px;
+        background-image: none !important;
+        border: none;
+        background-color: $color-text-300;
+
+        &:before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            display: block;
+            border-radius: 3px;
+            position: absolute;
+            top: 50%;
+            left: 6px;
+            transform: translateY(-50%);
+            background: $color-base-white;
+
+            transition: .2s;
+        }
+
+        &:hover {
+            border-color: $color-brand-secondary-medium;
+            background-color: $color-text-500;
+        }
+
+        &:checked {
+            background-color: $color-brand-secondary-medium;
+            &:before {
+                left: calc(100% - 24px);
+            }
+        }
+    }
+
+    &.invalid {
+        input {
+            border-color: $color-feedback-error-base;
+
+            &:checked {
+                border-color: $color-feedback-error-base;
+                background-color: $color-feedback-error-base;
+
+                &:hover {
+                    border-color: $color-feedback-error-base !important;
+                }
+
+                &:before {
+                    background-color: $color-feedback-error-base;
+                }
+            }
+        }
+    }
+
+    label {
+        display: inline-block;
+        color: $color-aliases-plataforma-textdefault;
+        text-align: left;
+        transition: .2s;
+        cursor: pointer;
+    }
+}
