@@ -1,31 +1,61 @@
-import BaseBtn from './../../../components/atoms/buttons/BaseBtn';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import BaseBtn from "./../../../components/atoms/buttons/BaseBtn";
+import React from "react";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-   
-      localStorage.setItem('auth', 'token');
-      // localStorage.setItem('auth', data.token);
-      navigate('/dashboard');
-    
+    if (typeof window !== 'undefined' && (window as any).ethereum !== 'undefined') {
+      let accounts;
+      debugger
+      try {
+        accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
+        localStorage.setItem('balance', '0');
+        localStorage.setItem('address', accounts[0]);
+        if (accounts && accounts.length > 0) {
+          navigate("/dashboard");
+
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error('MetaMask not found');
+    }
   };
 
   return (
+    <section className="h-screen bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
+      <div className="container mx-auto p-10 flex items-center justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white shadow-lg dark:bg-neutral-800 rounded-lg p-8 lg:p-12 w-full">
+          <div className="flex flex-col justify-center items-center lg:border-r lg:border-neutral-300 lg:pr-8">
+            <img className="" src="src/assets/images/metamask.png" alt="logo" />
+            <BaseBtn
+              onClick={handleSubmit}
+              className="w-full relative"
+              color="primary"
+              variant="contained"
+            >
+              Conectar com Metamask
+            </BaseBtn>
+          </div>
 
-    <div className="pt-2 sm:p-0 sm:justify-center sm:items-center sm:bg-gradient-to-r sm:from-primary-m sm:via-secondary-m sm:to-secondary-m sm:flex sm:flex-col sm:min-h-screen">
-          <BaseBtn
-            onClick={handleSubmit}
-            className='w-full relative'
-            color='secondary'
-            variant='contained'
-          >
-            Entrar
-          </BaseBtn>
-    </div>
+          <div className="flex flex-col justify-center items-center lg:bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white p-6 lg:p-12 rounded-lg">
+            <h4 className="mb-6 text-xl font-semibold text-center">
+              RALLY DA SORTE
+            </h4>
+            <p className="text-sm text-center">
+              Este é um jogo de sorte, onde você pode ganhar prêmios em
+              criptomoedas. Para jogar, você precisa conectar sua carteira
+              Metamask.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default Login; 
+export default Login;
