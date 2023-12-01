@@ -1,28 +1,28 @@
 import { useNavigate } from "react-router-dom";
 import BaseBtn from "./../../../components/atoms/buttons/BaseBtn";
-import React from "react";
+import React, { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [account, setAccount] = useState([]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (typeof window !== 'undefined' && (window as any).ethereum !== 'undefined') {
+    if (
+      typeof window !== "undefined" &&
+      (window as any).ethereum !== "undefined"
+    ) {
       let accounts;
-      debugger
-      try {
-        accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
-        localStorage.setItem('balance', '0');
-        localStorage.setItem('address', accounts[0]);
-        if (accounts && accounts.length > 0) {
-          navigate("/dashboard");
-
-        }
-      } catch (error) {
-        console.error(error);
+      accounts = await (window as any).ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      localStorage.setItem("auth", "token");
+      if (accounts && accounts.length > 0) {
+        localStorage.setItem("balance", "0");
+        localStorage.setItem("address", accounts[0]);
+        setAccount(accounts[0]);
+        navigate("/dashboard");
       }
-    } else {
-      console.error('MetaMask not found');
     }
   };
 
@@ -38,7 +38,9 @@ const Login = () => {
               color="primary"
               variant="contained"
             >
-              Conectar com Metamask
+              {account && account.length > 0
+                ? "Conectado com Metamask"
+                : "Conectar com Metamask"}
             </BaseBtn>
           </div>
 
