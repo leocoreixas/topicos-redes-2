@@ -4,7 +4,7 @@ const DashboardLayout = ({ children }: any) => {
     return (
         <div>
             <div className="flex">
-                <div className='h-screen px-8 py-16 border-r-[1px] border-gray-200'>
+                <div className=' text-white font-bold text-lg leading-7 sticky top-0 w-99 h-screen px-8 py-16 border-r-[1px] border-gray-200'>
                     <Sidebar />
                 </div>
 

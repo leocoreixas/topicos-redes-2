@@ -17,7 +17,7 @@ interface IProps {
     cancelButtonText?: string,
     onCancel?: MouseEventHandler,
     onConfirm: MouseEventHandler,
-    is_loading: boolean,
+    is_loading?: boolean,
     is_cancel_loading?: boolean,
     customIcon?: ReactElement,
 }
@@ -60,7 +60,7 @@ const AlertModal = (props: IProps) => {
                         ? customIcon
                         : (
                             <Icon 
-                                name="fill_warning" 
+                                name="warning" 
                                 color="warning" 
                                 size={40} 
                             />
@@ -93,7 +93,7 @@ const AlertModal = (props: IProps) => {
                                 onClick={onCancel}
                                 size="md"
                                 isLoading={is_cancel_loading}
-                                className="w-[80px] mb-lg-0 mb-xsm text-label-md"
+                                className=" mb-lg-0 mb-xsm text-label-md"
                             >
                                 {cancelButtonText}
                             </BaseBtn>
@@ -105,7 +105,7 @@ const AlertModal = (props: IProps) => {
                             onClick={onConfirm}
                             isLoading={is_loading}
                             size="md"
-                            className={`w-[80px] text-label-md`}
+                            className={`text-label-md`}
                         >
                             {confirmButtonText}
                         </BaseBtn>
