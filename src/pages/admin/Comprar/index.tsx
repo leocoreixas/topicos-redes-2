@@ -18,15 +18,15 @@ interface CardTypes {
 
 function Comprar() {
     const cardList: CardTypes[] = [
-        {  id: 1, title: 'Drift King', strength: '5', speed: '30', rarity:'legendary', chance: 0.0333, image: `image_7` },
-        {  id: 2, title: 'Ferrari', strength: '20', speed:'10', rarity:'legendary', chance: 0.0333, image: 'image_8' },
-        {  id: 3, title: 'Hudson', strength: '10', speed:'10', rarity:'legendary', chance: 0.0333, image: 'image_3' },
+        {  id: 1, title: 'Drift King', strength: '2.5', speed: '22.5', rarity:'legendary', chance: 0.0333, image: `image_7` },
+        {  id: 2, title: 'Ferrari', strength: '20', speed:'5', rarity:'legendary', chance: 0.0333, image: 'image_8' },
+        {  id: 3, title: 'Hudson', strength: '15', speed:'10', rarity:'legendary', chance: 0.0333, image: 'image_3' },
         {  id: 4, title: 'Red Bullet', strength: '10', speed:'10', rarity:'rare', chance: 0.0666, image: 'image_1' },
         {  id: 5, title: 'Yellow Flash', strength: '10', speed:'10', rarity:'rare', chance: 0.0666, image: 'image_5' },
         {  id: 6, title: 'Monster Truck', strength: '10', speed:'10', rarity:'rare', chance: 0.0666, image: 'image_6' },
-        {  id: 7, title: 'Fusca', strength: '10', speed:'10', rarity:'common', chance: 0.10, image: 'image_4' },
-        {  id: 8, title: 'Chevette', strength: '10', speed:'10', rarity:'common', chance: 0.10, image: 'image_2' },
-        {  id: 9, title: 'Kombi', strength: '10', speed:'10', rarity:'common', chance: 0.10, image: 'image_9' },
+        {  id: 7, title: 'Fusca', strength: '7.5', speed:'7.5', rarity:'common', chance: 0.10, image: 'image_4' },
+        {  id: 8, title: 'Chevette', strength: '10', speed:'5', rarity:'common', chance: 0.10, image: 'image_2' },
+        {  id: 9, title: 'Kombi', strength: '5', speed:'10', rarity:'common', chance: 0.10, image: 'image_9' },
     ];
 
     const [isLoading, setIsLoading] = useState(false);
