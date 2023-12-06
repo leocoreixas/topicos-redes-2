@@ -5,6 +5,7 @@ import CarCard from "../../../components/molecules/cards/CarCard";
 import Icon from "../../../components/atoms/icon";
 import AlertModal from "../../../components/molecules/modals/AlertModal";
 import BaseModal from "../../../components/molecules/modals/BaseModal";
+import OpenBox from "../../../components/cartesi/openBox";
 
 interface CardTypes {
     id: number;
@@ -59,12 +60,13 @@ function Comprar() {
     };
 
 
-    const handleClick =  () => {
+    const handleClick = async () => {
         setIsLoading(true);
-        new Promise((resolve) => setTimeout(resolve, 2000))
-            .then(() => setIsLoading(false))
-            .then(() => setBoxModalOpen(false))
-            .then(() => setWinner(chooseWinner()));
+        await OpenBox({car_id: 1, car_chance: 0.0333});
+        // new Promise((resolve) => setTimeout(resolve, 2000))
+        //     .then(() => setIsLoading(false))
+        //     .then(() => setBoxModalOpen(false))
+        //     .then(() => setWinner(chooseWinner()));
     };
 
     return (

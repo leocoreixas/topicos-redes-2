@@ -18,7 +18,7 @@ const WithdrawDialog = ({
   onNewBalanceInputChange, 
   openVoucherList
 }) => {
-  const dappAddress = process.env.NEXT_PUBLIC_LOCALHOST_DAPP_ADDRESS;
+  const dappAddress = import.meta.env.VITE_LOCALHOST_DAPP_ADDRESS;
 
   const handleInputChange = (e) => {
     const newValue = e.target.value;

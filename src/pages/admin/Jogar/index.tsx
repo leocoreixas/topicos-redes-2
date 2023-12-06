@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Typography from "../../../components/atoms/Typography";
 import "./index.css"; 
-import { Button, Spinner } from "@material-tailwind/react"; 
+import { Button } from "@material-tailwind/react"; 
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,6 @@ function App() {
   };
   return (
     <div className="App">
-      <center>
         <div className="flex px-10 pt-14 pb-8 border-b-[1px] border-gray-200">
           <Typography className="w-full" variant="h4" tag="h4" color="gray-800">
             Jogar
@@ -65,7 +64,6 @@ function App() {
             </div>
           )}
         </body>
-      </center>
     </div>
   );
 }

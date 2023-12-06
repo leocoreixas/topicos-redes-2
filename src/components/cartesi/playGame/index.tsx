@@ -1,13 +1,12 @@
 import Web3 from "web3";
 import { IInputBox__factory } from "@cartesi/rollups/";
 import FunctionsAdvanceEnum from "../../../util/enums/FunctionsAdvanceEnum";
-import dotenv from "dotenv";
-dotenv.config();
 
-const NEXT_PUBLIC_LOCALHOST_DAPP_ADDRESS =
-  process.env.NEXT_PUBLIC_LOCALHOST_DAPP_ADDRESS;
-const NEXT_PUBLIC_LOCALHOST_INPUTBOX_ADDRESS =
-  process.env.NEXT_PUBLIC_LOCALHOST_INPUTBOX_ADDRESS;
+
+const VITE_LOCALHOST_DAPP_ADDRESS =
+  import.meta.env.VITE_LOCALHOST_DAPP_ADDRESS;
+const VITE_LOCALHOST_INPUTBOX_ADDRESS =
+  import.meta.env.VITE_LOCALHOST_INPUTBOX_ADDRESS;
 
 async function OpenBox(data: any) {
   const localStorareUser = localStorage.getItem("user_id") || "";
@@ -16,7 +15,7 @@ async function OpenBox(data: any) {
     let web3 = new Web3((window as any).ethereum);
     const inputContract = new web3.eth.Contract(
       IInputBox__factory.abi,
-      NEXT_PUBLIC_LOCALHOST_INPUTBOX_ADDRESS
+      VITE_LOCALHOST_INPUTBOX_ADDRESS
     );
     const input = {
       function_id: FunctionsAdvanceEnum.PLAY_GAME,
@@ -32,7 +31,7 @@ async function OpenBox(data: any) {
     const inputHex = web3.utils.utf8ToHex(inputString);
     try {
       await inputContract.methods
-        .addInput(NEXT_PUBLIC_LOCALHOST_DAPP_ADDRESS as string, inputHex)
+        .addInput(VITE_LOCALHOST_DAPP_ADDRESS as string, inputHex)
         .send({ from: localStorareUser });
     } catch (error) {
       console.log(error);

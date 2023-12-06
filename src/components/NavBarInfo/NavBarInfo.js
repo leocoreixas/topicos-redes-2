@@ -23,7 +23,7 @@ import { Client, Provider, cacheExchange, fetchExchange } from 'urql';
 
 
 const client = new Client({
-    url: process.env.NEXT_PUBLIC_URL_QUERY_GRAPHQL,
+    url: import.meta.env.VITE_URL_QUERY_GRAPHQL,
     exchanges: [cacheExchange, fetchExchange],
 });
 

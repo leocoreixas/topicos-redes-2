@@ -2,10 +2,9 @@ import axios from "axios";
 import web3 from "web3";
 import "./ListInspectReOffers.css";
 import FunctionsInspectEnum from "../../../util/enums/FunctionsInspectEnum";
-import dotenv from "dotenv";
-dotenv.config();
 
-const NEXT_PUBLIC_INSPECT_URL = process.env.NEXT_PUBLIC_INSPECT_URL;
+
+const VITE_INSPECT_URL = import.meta.env.VITE_INSPECT_URL;
 
 async function listCars() {
   const localStorareUser = localStorage.getItem("user_id");
@@ -15,7 +14,7 @@ async function listCars() {
     user_id: localStorareUser,
   };
   const stringToEncode = JSON.stringify(payload);
-  const url = `${NEXT_PUBLIC_INSPECT_URL}/${stringToEncode}`;
+  const url = `${VITE_INSPECT_URL}/${stringToEncode}`;
 
   let config = {
     url: url,
