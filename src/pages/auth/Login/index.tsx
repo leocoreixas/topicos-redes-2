@@ -12,7 +12,7 @@ const Login = () => {
       typeof window !== "undefined" &&
       (window as any).ethereum !== "undefined"
     ) {
-      let accounts;
+      let accounts = null;
       accounts = await (window as any).ethereum.request({
         method: "eth_requestAccounts",
       });

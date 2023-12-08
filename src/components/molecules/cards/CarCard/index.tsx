@@ -1,17 +1,20 @@
+import { MouseEventHandler } from 'react';
 import Typography from '../../../atoms/Typography';
 import classNames from 'classnames';
 
 interface IProps {
-    title: string;
-    strength: string;
-    speed: string;
-    image: string;
-    rarity: string;
+    title: string | undefined;
+    strength: string | undefined;
+    speed: string | undefined;
+    rarity: string | undefined;
+    image: string | undefined;
+    hoverable?: boolean;
+    onClick?: MouseEventHandler | undefined
     className?: string;    
 }
 
 function CarCard(props: IProps) {
-    const { title, strength, speed, rarity, image, className } = props;
+    const { title, strength, speed, rarity, image, hoverable, onClick, className } = props;
 
     const classes = {
         variants: {
@@ -23,8 +26,9 @@ function CarCard(props: IProps) {
 
     return (
         <>
-            <div className={classNames(
-                'w-[300px] p-4 flex flex-col justify-center rounded-2xl',
+            <div onClick={onClick} className={classNames(
+                'w-[300px] p-4 flex flex-col justify-center rounded-2xl',      
+                {[hoverable ? 'cursor-pointer transition ease-in-out duration-300 transform hover:scale-105' : '']: hoverable},
                 {[classes.variants.yellow]: rarity === 'legendary'},
                 {[classes.variants.blue]: rarity === 'rare'},
                 {[classes.variants.gray]: rarity === 'common'},

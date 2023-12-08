@@ -21,9 +21,7 @@ function Retirada() {
 
     return (
         <>
-            <div className="flex px-10 pt-14 pb-8 border-b-[1px] border-gray-200">
-                <Typography className="w-full" variant="h4" tag='h4' color="gray-800">Retirada</Typography>
-            </div>
+
 
             <div style={{ height: `calc(100vh - ${divSuperiorHeight}px)` }} className="flex flex-col gap-4 justify-center items-center">
                 <Typography tag="p" variant="body-lg">

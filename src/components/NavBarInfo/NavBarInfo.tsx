@@ -1,32 +1,21 @@
 import React, { useState, useEffect } from "react";
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import TextField from '@mui/material/TextField';
 import './NavbarInfo.css';
-import AddBalanceWallet from "../Cartesi/AddBalanceWallet/AddBalanceWallet";
-import GenerateWithdrawBalanceWallet from "../Cartesi/GenerateWithDrawBalance/GenerateWithDrawBalance";
-import WithdrawBalanceWallet from "../Cartesi/WithDrawBalance/WithDrawBalance";
-import GetBalance from "../Cartesi/GetBalanceWallet/GetBlanceWallet";
-import CircularProgress from "@mui/material/CircularProgress";
-import ToggleColorMode from "../DarkMode/DarkMode";
+import AddBalanceWallet from "../cartesi/addBalance";
+import GenerateWithdrawBalanceWallet from "../cartesi/generateVoucher";
+import GetBalance from "../cartesi/getBalance";
 import AddBalanceDialog from "./AddBalance";
 import GenerateWithdrawDialog from "./GenerateWithDrawBalance";
 import WithdrawDialog from "./WithDrawBalance";
-import { faCircleInfo, faPlus, faMoneyBillTransfer, } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Menu, MenuItem, Tooltip } from "@mui/material";
+import { Menu, MenuHandler, MenuItem, Tooltip, MenuList, Button } from "@material-tailwind/react";
 import { Client, Provider, cacheExchange, fetchExchange } from 'urql';
+import Icon from "../atoms/icon";
+import BaseBtn from "../atoms/buttons/BaseBtn";
 
 
 const client = new Client({
-    url: import.meta.env.VITE_URL_QUERY_GRAPHQL,
+    url: 'https://api.thegraph.com/subgraphs/name/cartesi/ctsi-rinkeby',
     exchanges: [cacheExchange, fetchExchange],
 });
-
 
 const NavBarInfo = ({ money }) => {
     const [balance, setBalance] = useState(() => localStorage.getItem('balance') || 0);
@@ -85,7 +74,7 @@ const NavBarInfo = ({ money }) => {
         setConfirmOpen(true);
     };
 
-    const handleAnchorClick = (event) => {
+    const handleAnchorClick = (event:any) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -122,7 +111,7 @@ const NavBarInfo = ({ money }) => {
 
     const handleGenerateWithdrawBalance = async () => {
         try {
-            if (isNaN(newBalanceInput)) {
+            if (isNaN(Number(newBalanceInput))) {
                 alert("Please enter a valid number.");
                 return;
             }
@@ -161,7 +150,7 @@ const NavBarInfo = ({ money }) => {
 
 
     const getBalanceAndUpdate = async () => {
-        const balance = await GetBalance(user) || 0;
+        const balance = await GetBalance(user || "0xB319AB9c1C30926B961A22AA6Cc7d897eda4acbC");
         setBalance(balance);
         localStorage.setItem('balance', balance?.toString());
     };
@@ -171,86 +160,64 @@ const NavBarInfo = ({ money }) => {
     }, [balance]);
 
     useEffect(() => {
-        const handleAccountsChanged = (accounts) => {
+        const handleAccountsChanged = (accounts:any) => {
             if (accounts.length === 0) {
                 setUser(null); // Set user to null when disconnected
                 localStorage.removeItem('user_id');
                 window.location.href = "/";
             }
         };
-        window.ethereum.on("accountsChanged", handleAccountsChanged);
+        (window as any).ethereum?.on("accountsChanged", handleAccountsChanged);
         return () => {
-            window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
+            (window as any).ethereum.removeListener("accountsChanged", handleAccountsChanged);
         };
     }, []);
 
     const [newBalanceInput, setNewBalanceInput] = useState("");
 
     return (
+        <>
         <Provider value={client}>
             <div className="navbar-info-container">
                 <nav className="navbar-info">
                     <h1 className="navbar-info-logo">
-                        <span className="navbar-logo-text">Balance: {balance} ETH</span>
-                        <span className="navbar-logo-text">For withdraw: {voucher} ETH</span>
-                        <Button
-                            variant="contained"
-                            onClick={handleAnchorClick}
-                            disabled={isAddingBalance}
-                            sx={{
-                                backgroundColor: "#fdad00",
-                                "&:hover": {
-                                    backgroundColor: "#ffecb3",
-                                },
-                            }}
-                        >
-                            {isAddingBalance ? (
-                                <CircularProgress size={20} color="inherit" />
-                            ) : (
-                                "Actions"
-                            )}
-                        </Button>
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleAnchorClose}
-                        >
-                            <MenuItem onClick={() => {
-                                handleAnchorClose();
-                                handleOpen();
-                            }}>
-                                <Tooltip title="Add money to the account" arrow>
-                                    <FontAwesomeIcon
-                                        icon={faPlus}
-                                        style={{ marginRight: "8px", cursor: "pointer" }}
-                                    />
-                                </Tooltip>
-                                Add Balance
-                            </MenuItem>
-                            <MenuItem onClick={() => {
-                                handleAnchorClose();
-                                handleOpenGenerateWithdraw();
-                            }}>
-                                <Tooltip title="Necessary to make the money available for withdrawal, do this action before the withdraw button below, if needed" arrow>
-                                    <FontAwesomeIcon
-                                        icon={faCircleInfo}
-                                        style={{ marginRight: "8px", cursor: "pointer" }}
-                                    />
-                                </Tooltip>
-                                Generate Balance to Withdraw
-                            </MenuItem>
-                            <MenuItem onClick={() => {
-                                handleAnchorClose();
-                                handleOpenWithdraw();
-                            }}>
-                                <Tooltip title="Withdraw money" arrow>
-                                    <FontAwesomeIcon
-                                        icon={faMoneyBillTransfer}
-                                        style={{ marginRight: "8px", cursor: "pointer" }}
-                                    />
-                                </Tooltip>
-                                Withdraw
-                            </MenuItem>
+                        <span className="navbar-logo-text mr-5">Balance: {balance} ETH</span>
+                        <span className="navbar-logo-text mr-5">For withdraw: {voucher} ETH</span>
+
+                        <Menu placement="bottom-end">
+                            <MenuHandler>
+                                <Button>Actions</Button>
+                            </MenuHandler>
+                            <MenuList>
+                                <MenuItem onClick={() => {
+                                    handleAnchorClose();
+                                    handleOpen();
+                                }}>
+                                    <div className="flex items-center">
+                                        <Icon className="mr-4" name="plus" size={20} />
+                                        Add Balance
+                                    </div>   
+                                </MenuItem>
+                                <MenuItem onClick={() => {
+                                    handleAnchorClose();
+                                    handleOpenGenerateWithdraw();
+                                }}>
+                                     <div className="flex items-center">
+                                        <Icon className="mr-4" name="cycle" size={20} />
+                                        Generate Balance to Withdraw
+                                    </div>
+                                </MenuItem>
+                                <MenuItem onClick={() => {
+                                    handleAnchorClose();
+                                    handleOpenWithdraw();
+                                }}>
+                                    <div className="flex items-center">
+                                        <Icon className="mr-4" name="withdraw" size={20} />
+                                        Withdraw
+                                    </div>
+                                   
+                                </MenuItem>
+                            </MenuList>
                         </Menu>
                     </h1>
                 </nav>
@@ -285,6 +252,7 @@ const NavBarInfo = ({ money }) => {
                 />
             </div>
         </Provider>
+        </>
     );
 
 };

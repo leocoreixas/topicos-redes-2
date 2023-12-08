@@ -99,9 +99,9 @@ const BaseBtn = (props: IProps) => {
             loadingClass: `bg-error-m text-white border border-error-m hover:bg-error-m hover:text-error-m`
         }
     }
-
+    
     const classes = {
-        base: 'relative focus:outline-none transition ease-in-out duration-300 font-medium',
+        base: 'relative focus:outline-none transition ease-in-out duration-300 font-medium ',
         disabled: {
             outline: 'border bg-transparent border-gray-300 text-gray-300 cursor-not-allowed',
             contained: 'bg-gray-300 text-gray-100 opacity-50 cursor-not-allowed'
