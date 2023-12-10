@@ -113,9 +113,9 @@ function Configuracoes() {
     const aux = myCars.map((car) => ({ ...car, checked: false }));
     setMyCars(aux);
     const car = myCars.find((car) => car.created_at === date) as any;
-    debugger
     if (!car) return;
     car.checked = true;
+    localStorage.setItem("selectedCar", JSON.stringify(car));
     setSelectedCar(car);
     setConfirmModalOpen(true);
   };
@@ -123,7 +123,7 @@ function Configuracoes() {
 
   const getMyCars = async () => {
     let myCars = (await listCars()) as any;
-    debugger
+    
     myCars = myCars.map((data: any) => ({
       id: data.car.id,
       title: data.car.title,
@@ -138,6 +138,15 @@ function Configuracoes() {
     setMyCars(myCars);
   };
 
+  const haveSelectedCar = () => {
+    const carString = localStorage.getItem("selectedCar");
+    
+    const carParsed = carString ? JSON.parse(carString || "") : undefined;
+    if (carParsed) {
+      setSelectedCar(carParsed);
+    }
+  }
+
   const removeCar = () => {
     setSelectedCar(undefined);
     localStorage.removeItem("selectedCar");
@@ -145,6 +154,7 @@ function Configuracoes() {
 
   useEffect(() => {
     getMyCars();
+    haveSelectedCar()
   }, []);
 
   return (

@@ -15,7 +15,7 @@ const client = new Client({
     exchanges: [cacheExchange, fetchExchange],
 });
 
-const NavBarInfo = ({ money }) => {
+const NavBarInfo = () => {
     const [balance, setBalance] = useState(() => localStorage.getItem('balance') || 0);
     const [voucher, setVoucher] = useState(() => localStorage.getItem('voucher') || 0);
     const [user, setUser] = useState(() => localStorage.getItem('address'));
