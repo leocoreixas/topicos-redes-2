@@ -40,14 +40,6 @@ function Sidebar() {
 
                         </NavLink>
                         <NavLink
-                            to="/retirada"
-                        >
-                            {({ isActive }) => (
-                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='cashout'>Retirada</NavItem>
-                            )}
-
-                        </NavLink>
-                        <NavLink
                             to="/historico"
                         >
                             {({ isActive }) => (       

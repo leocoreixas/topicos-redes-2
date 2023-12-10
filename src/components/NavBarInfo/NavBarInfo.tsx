@@ -9,8 +9,6 @@ import WithdrawDialog from "./WithDrawBalance";
 import { Menu, MenuHandler, MenuItem, Tooltip, MenuList, Button } from "@material-tailwind/react";
 import { Client, Provider, cacheExchange, fetchExchange } from 'urql';
 import Icon from "../atoms/icon";
-import BaseBtn from "../atoms/buttons/BaseBtn";
-
 
 const client = new Client({
     url: 'https://api.thegraph.com/subgraphs/name/cartesi/ctsi-rinkeby',
@@ -20,7 +18,7 @@ const client = new Client({
 const NavBarInfo = ({ money }) => {
     const [balance, setBalance] = useState(() => localStorage.getItem('balance') || 0);
     const [voucher, setVoucher] = useState(() => localStorage.getItem('voucher') || 0);
-    const [user, setUser] = useState(() => localStorage.getItem('user_id'));
+    const [user, setUser] = useState(() => localStorage.getItem('address'));
     const [open, setOpen] = useState(false); // State to control the main modal
     const [confirmOpen, setConfirmOpen] = useState(false); // State to control the confirmation modal
     const [isAddingBalance, setIsAddingBalance] = useState(false); // State for controlling the spinner
@@ -150,7 +148,7 @@ const NavBarInfo = ({ money }) => {
 
 
     const getBalanceAndUpdate = async () => {
-        const balance = await GetBalance(user || "0xB319AB9c1C30926B961A22AA6Cc7d897eda4acbC");
+        const balance = await GetBalance(user as string);
         setBalance(balance);
         localStorage.setItem('balance', balance?.toString());
     };
@@ -163,7 +161,7 @@ const NavBarInfo = ({ money }) => {
         const handleAccountsChanged = (accounts:any) => {
             if (accounts.length === 0) {
                 setUser(null); // Set user to null when disconnected
-                localStorage.removeItem('user_id');
+                localStorage.removeItem('address');
                 window.location.href = "/";
             }
         };

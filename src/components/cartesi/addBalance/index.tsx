@@ -7,7 +7,7 @@ const VITE_LOCALHOST_ETHER_PORTAL_ADDRESS = import.meta.env.VITE_LOCALHOST_ETHER
 
 async function AddBalanceWallet(balance: string) {
     try {
-        const localStorareUser = localStorage.getItem('user_id') || '';
+        const localStorareUser = localStorage.getItem('address') || '';
         let web3 = new Web3(((window  as any).ethereum))
         balance = balance ? balance?.toString() : '0';
         const ethersContract = new web3.eth.Contract(EtherPortal__factory.abi, VITE_LOCALHOST_ETHER_PORTAL_ADDRESS);

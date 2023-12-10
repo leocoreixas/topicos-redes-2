@@ -9,7 +9,7 @@ const VITE_LOCALHOST_INPUTBOX_ADDRESS =
   import.meta.env.VITE_LOCALHOST_INPUTBOX_ADDRESS;
 
 async function OpenBox(data: any) {
-  const localStorareUser = localStorage.getItem("user_id") || "";
+  const localStorareUser = localStorage.getItem("address") || "";
 
   try {
     let web3 = new Web3((window as any).ethereum);

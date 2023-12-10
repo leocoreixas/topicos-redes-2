@@ -67,7 +67,7 @@
 
 .car_2 {
   position: absolute;
-  left: 1100px;
+  left: 1050px;
   bottom: -100px;
   z-index: 2;
   animation: car_2 5s linear infinite;
@@ -88,7 +88,7 @@
 
 .car_example_2 {
   position: absolute;
-  left: 850px;
+  left: 800px;
   bottom: -100px;
   z-index: 2;
 }

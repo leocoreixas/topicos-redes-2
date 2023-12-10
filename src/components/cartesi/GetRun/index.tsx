@@ -5,8 +5,8 @@ const VITE_INSPECT_URL = import.meta.env.VITE_INSPECT_URL;
 
 
 
-async function GetBalance(user_id: string) {
-    const localStorareUser = user_id || localStorage.getItem("user_id");
+async function GetRun(user_id: string) {
+    const localStorareUser = user_id || localStorage.getItem("address");
     const payload = {
         function_id: FunctionsInspectEnum.GET_RUNS,
         run_id: 1,
@@ -40,13 +40,11 @@ async function GetBalance(user_id: string) {
 
             return JSON.parse(stringModified);
         }) : [];
-        const voucher = arrayOfObjects.length > 1 ? arrayOfObjects[1].amount : '0';
-        localStorage.setItem('voucher', voucher);
-        return arrayOfObjects.length > 0 ? arrayOfObjects[0].amount : '0';
+        return arrayOfObjects;
     } catch (error) {
         console.log(error);
     }
 };
 
 
-export default GetBalance;
+export default GetRun;

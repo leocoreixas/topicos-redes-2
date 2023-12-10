@@ -7,8 +7,7 @@ const VITE_LOCALHOST_INPUTBOX_ADDRESS =
   import.meta.env.VITE_LOCALHOST_INPUTBOX_ADDRESS;
 
 async function OpenBox(data: any) {
-  const localStorareUser = localStorage.getItem("user_id") || "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
-  debugger
+  const localStorareUser = localStorage.getItem("address") as string;
 
   try {
     let web3 = new Web3((window as any).ethereum);
@@ -19,9 +18,7 @@ async function OpenBox(data: any) {
     const input = {
       function_id: FunctionsAdvanceEnum.OPEN_BOX,
       needToNotice: true,
-      car_id: data.car_id,
-      car_chance: data.car_chance,
-      amount: 1,
+      box_value: data.box_value,
       user_id: localStorareUser,
       created_at: new Date(),
     };
@@ -31,11 +28,14 @@ async function OpenBox(data: any) {
       await inputContract.methods
         .addInput(VITE_LOCALHOST_DAPP_ADDRESS as string, inputHex)
         .send({ from: localStorareUser });
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   } catch (error) {
     console.error("Error occurred while sending input:", error);
+    return false;
   }
 }
 

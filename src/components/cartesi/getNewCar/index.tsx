@@ -5,7 +5,7 @@ import FunctionsInspectEnum from "../../../util/enums/FunctionsInspectEnum";
 
 const VITE_INSPECT_URL = import.meta.env.VITE_INSPECT_URL;
 
-async function listCars() {
+async function getNewCar() {
   const localStorareUser = localStorage.getItem("address");
 
   const payload = {
@@ -24,7 +24,6 @@ async function listCars() {
 
   try {
     const response = await axios.get(config.url);
-
     const parsedData = response.data.reports[0].payload;
     const regularString = web3.utils.hexToAscii(parsedData);
     let arrayOfString = regularString.split("\n");
@@ -57,4 +56,4 @@ function replaceSpecialCharacters(data: any) {
     return sanitizedData;
 }
 
-export default listCars;
+export default getNewCar;
