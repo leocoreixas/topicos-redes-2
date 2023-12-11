@@ -1,28 +1,40 @@
-import Typography from "../../../components/atoms/Typography";
 import { useState } from "react";
 import HistoricCard from "../../../components/molecules/cards/HistoricCard";
-
+import GetRun from "../../../components/cartesi/GetRun";
+import { useEffect } from "react";
 function Historico() {
 
-    const [historico, setHistorico] = useState([
-        { id: 1, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: false },
-        { id: 2, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: false },
-        { id: 3, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: false },
-        { id: 4, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: true },
-        { id: 5, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: true },
-        { id: 6, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: false },
-        { id: 7, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: false },
-        { id: 8, created_at: '10/10/2021', car: 'Ferrari', value: '0.01', status: false },
-    ]);
+    const [historico, setHistorico] = useState([]);
+    const LOSER = 100000000000000000
+    const getHistorico = async () => {
+        const user = localStorage.getItem("address") as string;
+        debugger
+        const history = await GetRun(user);
+        if(history && history.length > 0){
+            debugger
+            const mapHistory = history.map((item: any) => {
+                return {
+                    id: item.run_id,
+                    created_at: item.timestamp,
+                    car: item.car_1.title,
+                    value: item.winner == item.user_id_1 ? item.price :LOSER,
+                    status: item.winner == item.user_id_1 ? true : false
+                }
+            }) as any;
+            setHistorico(mapHistory);
+        }
+    }
 
-
+    useEffect(() => {
+        getHistorico();
+    }, []);
 
 
     return (
         <>
             <div className="px-4">
-                {historico ? historico.map((item) => (
-                    <HistoricCard key={item.id} className="mt-4" createdAt={item.created_at} car={item.car} value={item.value} status={item.status}/>
+                {historico ? historico.map((item: any) => (
+                    <HistoricCard key={item.id} className="mt-10 mr-20 ml-20" createdAt={item.created_at} car={item.car} value={item.value} status={item.status}/>
                 )) : null
                 }
             </div>

@@ -21,10 +21,7 @@ async function OpenBox(data: any) {
       function_id: FunctionsAdvanceEnum.PLAY_GAME,
       needToNotice: true,
       car_id_1: data.car_id_1,
-      car_chance_win_1: data.car_chance_win_2,
-      car_id_2: data.car_id_2,
-      car_chance_win_2: data.car_chance_win_2,
-      user_id: localStorareUser,
+      user_id_1: localStorareUser,
       created_at: new Date(),
     };
     const inputString = JSON.stringify(input);
@@ -33,6 +30,7 @@ async function OpenBox(data: any) {
       await inputContract.methods
         .addInput(VITE_LOCALHOST_DAPP_ADDRESS as string, inputHex)
         .send({ from: localStorareUser });
+        return true;
     } catch (error) {
       console.log(error);
     }

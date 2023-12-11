@@ -5,19 +5,35 @@ import { Button } from "@material-tailwind/react";
 import CarCard from "../../../components/molecules/cards/CarCard";
 import { useEffect } from "react";
 import Icon from "../../../components/atoms/icon";
+import playGame from "../../../components/cartesi/playGame";
+import getWinner from "../../../components/cartesi/getWinner";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [selectedCar, setSelectedCar] = useState<any>(null);
+  const [winnerCar, setWinnerCar] = useState<any>(null);
 
-  const playGame = () => {
-    setLoading(false);
-    setTimeout(() => {
-      setLoading(true);
-    }, 5000);
+  const playGameNow = async () => {
+    setLoading(true);
+    const user = localStorage.getItem("address") as string;
+    debugger
+    const winner = await playGame(
+      { car_id_1: selectedCar.id, car_chance_win_1: selectedCar.chance})
+    setTimeout(async () => {
+      if (winner) {
+        await getWinner(user).then((response) => {
+          if (response) {
+            setWinnerCar(response[0]);
+            setLoading(false);
+          }
+        });
+      }
+    }, 10000);
+    
   };
 
   useEffect(() => {
+    debugger;
     const carString = localStorage.getItem("selectedCar");
     const carParsed = carString ? JSON.parse(carString || "") : undefined;
     if (carParsed) {
@@ -30,15 +46,15 @@ function App() {
         <div className="flex flex-col items-center">
           <div
             className="flex justify-center items-center mb-4 border border-gray-300 rounded-full p-1"
-            style={{ maxWidth: "150px" , marginTop: "20px"}}
+            style={{ maxWidth: "150px", marginTop: "20px" }}
           >
-            <Typography tag="p" variant="label-md" >
+            <Typography tag="p" variant="label-md">
               0.01 ETH
             </Typography>
             <Icon name="ethereum" />
           </div>
 
-          <Button onClick={playGame} className="mt-4">
+          <Button disabled={!selectedCar} onClick={playGameNow} className="mt-4">
             Jogar
           </Button>
         </div>
@@ -49,13 +65,13 @@ function App() {
                 <div className="city">
                   <div className="car_example_1">
                     <img
-                      src="../../src/assets/images/image_1.png"
+                      src="../../src/assets/images/image_5.png"
                       alt="car_example"
                     />
                   </div>
                   <div className="car_example_2">
                     <img
-                      src="../../src/assets/images/image_2.png"
+                      src="../../src/assets/images/image_6.png"
                       alt="car_example"
                     />
                   </div>
@@ -105,7 +121,17 @@ function App() {
             <div className="highway">
               <div className="city">
                 <div className="car_1">
-                  <img src="../../src/assets/images/image_1.png" alt="car_1" />
+                  {selectedCar ? (
+                    <img
+                      src={`../../src/assets/images/${selectedCar.image}.png`}
+                      alt="car_1"
+                    />
+                  ) : (
+                    <img
+                      src="../../src/assets/images/other_image.png"
+                      alt="other_car"
+                    />
+                  )}
                 </div>
                 <div className="car_2">
                   <img src="../../src/assets/images/image_2.png" alt="car_2" />

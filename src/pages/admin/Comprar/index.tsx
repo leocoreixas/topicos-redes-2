@@ -125,16 +125,11 @@ function Comprar() {
       return;
     }
     const opened = await OpenBox({ box_value: BOX_VALUE });
-    setTimeout(() => {
-      setIsLoading(true);
-      setBoxModalOpen(true);
-    }
-    , 8000);
     debugger
     if (opened) {
       let searchNewCar = (await getNewCar()) as any;
-      const newCar = searchNewCar ? searchNewCar.pop() : [];
-      if (newCar.length > 0) {
+      const newCar = searchNewCar ? searchNewCar.pop() :null;
+      if (newCar) {
         const car = newCar.car;
         const carjson = {
           id: car.id,
