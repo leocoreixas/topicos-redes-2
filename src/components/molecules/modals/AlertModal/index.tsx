@@ -104,6 +104,7 @@ const AlertModal = (props: IProps) => {
                             color="secondary"
                             onClick={onConfirm}
                             isLoading={is_loading}
+                            disabled={is_loading}
                             size="md"
                             className={`text-label-md`}
                         >

@@ -7,6 +7,7 @@ import AlertModal from "../../../components/molecules/modals/AlertModal";
 import BaseModal from "../../../components/molecules/modals/BaseModal";
 import OpenBox from "../../../components/cartesi/openBox";
 import getNewCar from "../../../components/cartesi/getNewCar";
+import getBalance from "../../../components/cartesi/getBalance";
 
 interface CardTypes {
   id: number;
@@ -116,11 +117,25 @@ function Comprar() {
 
   const handleClick = async () => {
     setIsLoading(true);
+    const user_id = localStorage.getItem("address")as string;
+    const balance = await getBalance(user_id);
+    if (balance < BOX_VALUE) {
+      setIsLoading(false);
+      alert("Saldo insuficiente");
+      return;
+    }
     const opened = await OpenBox({ box_value: BOX_VALUE });
-    let newCar = (await getNewCar()) as any;
+    setTimeout(() => {
+      setIsLoading(true);
+      setBoxModalOpen(true);
+    }
+    , 8000);
+    debugger
     if (opened) {
+      let searchNewCar = (await getNewCar()) as any;
+      const newCar = searchNewCar ? searchNewCar.pop() : [];
       if (newCar.length > 0) {
-        const car = newCar[0].car;
+        const car = newCar.car;
         const carjson = {
           id: car.id,
           title: car.title,
@@ -133,10 +148,7 @@ function Comprar() {
       }
       setIsLoading(false);
       setBoxModalOpen(false);
-    } else {
-        setIsLoading(false);
-        setBoxModalOpen(false);
-    }
+    } 
   };
 
   return (

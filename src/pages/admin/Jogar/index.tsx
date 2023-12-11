@@ -4,6 +4,7 @@ import "./index.css";
 import { Button } from "@material-tailwind/react";
 import CarCard from "../../../components/molecules/cards/CarCard";
 import { useEffect } from "react";
+import Icon from "../../../components/atoms/icon";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,13 +27,21 @@ function App() {
   return (
     <div className="App">
       <body>
-        <Button
-          onClick={playGame}
-          style={{ marginTop: "15px", marginLeft: "50px" }}
-        >
-          Jogar
-        </Button>
+        <div className="flex flex-col items-center">
+          <div
+            className="flex justify-center items-center mb-4 border border-gray-300 rounded-full p-1"
+            style={{ maxWidth: "150px" , marginTop: "20px"}}
+          >
+            <Typography tag="p" variant="label-md" >
+              0.01 ETH
+            </Typography>
+            <Icon name="ethereum" />
+          </div>
 
+          <Button onClick={playGame} className="mt-4">
+            Jogar
+          </Button>
+        </div>
         {loading ? (
           <div className="first-collunm">
             <div className="hero">

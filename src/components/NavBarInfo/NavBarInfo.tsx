@@ -145,6 +145,12 @@ const NavBarInfo = () => {
         }
     };
 
+    const refreshBalance = async () => {
+        const balance = await GetBalance(user as string);
+        setBalance(balance);
+        localStorage.setItem('balance', balance?.toString());
+    }
+
 
 
     const getBalanceAndUpdate = async () => {
@@ -155,7 +161,7 @@ const NavBarInfo = () => {
 
     useEffect(() => {
         getBalanceAndUpdate();
-    }, [balance]);
+    }, []);
 
     useEffect(() => {
         const handleAccountsChanged = (accounts:any) => {
@@ -179,6 +185,7 @@ const NavBarInfo = () => {
             <div className="navbar-info-container">
                 <nav className="navbar-info">
                     <h1 className="navbar-info-logo">
+                        <Button color="blue" style={ {marginRight: "30px"}} onClick={refreshBalance}>refresh Balance</Button>
                         <span className="navbar-logo-text mr-5">Balance: {balance} ETH</span>
                         <span className="navbar-logo-text mr-5">For withdraw: {voucher} ETH</span>
 
