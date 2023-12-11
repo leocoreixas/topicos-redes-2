@@ -158,7 +158,7 @@ function Comprar() {
             />
             <div className="flex justify-center items-center mb-4 border border-gray-300 rounded-full p-1">
               <Typography tag="p" variant="label-md">
-                0.01 ETH
+                0.1 ETH
               </Typography>
               <Icon name="ethereum" />
             </div>

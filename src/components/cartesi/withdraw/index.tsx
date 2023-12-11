@@ -1,21 +1,3 @@
-// -------------------------TODO-------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import { BigNumber, ethers } from "ethers";
 // import React, { useEffect } from "react";
 // import { useVouchersQuery, useVoucherQuery } from "../helpers/generated/index";

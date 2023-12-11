@@ -16,9 +16,11 @@ function App() {
   const playGameNow = async () => {
     setLoading(true);
     const user = localStorage.getItem("address") as string;
-    debugger
-    const winner = await playGame(
-      { car_id_1: selectedCar.id, car_chance_win_1: selectedCar.chance})
+    debugger;
+    const winner = await playGame({
+      car_id_1: selectedCar.id,
+      car_chance_win_1: selectedCar.chance,
+    });
     setTimeout(async () => {
       if (winner) {
         await getWinner(user).then((response) => {
@@ -29,7 +31,6 @@ function App() {
         });
       }
     }, 10000);
-    
   };
 
   useEffect(() => {
@@ -49,12 +50,16 @@ function App() {
             style={{ maxWidth: "150px", marginTop: "20px" }}
           >
             <Typography tag="p" variant="label-md">
-              0.01 ETH
+              0.1 ETH
             </Typography>
             <Icon name="ethereum" />
           </div>
 
-          <Button disabled={!selectedCar} onClick={playGameNow} className="mt-4">
+          <Button
+            disabled={!selectedCar}
+            onClick={playGameNow}
+            className="mt-4"
+          >
             Jogar
           </Button>
         </div>

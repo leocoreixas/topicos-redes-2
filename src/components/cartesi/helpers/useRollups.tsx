@@ -1,6 +1,3 @@
-// -------------------------TODO-------------------------
-
-
 // import { useEffect, useState } from "react";
 // import { ethers } from "ethers";
 // import { useSetChain, useWallets } from "@web3-onboard/react";
