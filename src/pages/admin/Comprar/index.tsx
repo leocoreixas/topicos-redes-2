@@ -125,7 +125,6 @@ function Comprar() {
       return;
     }
     const opened = await OpenBox({ box_value: BOX_VALUE });
-    debugger
     if (opened) {
       let searchNewCar = (await getNewCar()) as any;
       const newCar = searchNewCar ? searchNewCar.pop() :null;
@@ -193,6 +192,7 @@ function Comprar() {
           confirmButtonText="Confirmar"
           onConfirm={() => setWinner(null)}
         >
+          <>
           {winner !== null ? (
             <CarCard
               title={winner.title}
@@ -202,6 +202,12 @@ function Comprar() {
               rarity={winner.rarity}
             />
           ) : undefined}
+          <Typography className="mt-4" tag="p" variant="label-md">
+            Veja seus carros na aba "Meus Carros"
+          </Typography>
+          </>
+         
+          
         </BaseModal>
 
         <div className="pb-4 pt-6">

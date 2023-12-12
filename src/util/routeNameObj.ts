@@ -4,7 +4,7 @@ const routeNameObj = {
     '/jogar': 'Jogar',
     '/retirada': 'Retirada',
     '/historico': 'Histórico',
-    '/configuracoes': 'Configurações',
+    '/meus-carros': 'Meus Carros',
     };
 
 export default routeNameObj;

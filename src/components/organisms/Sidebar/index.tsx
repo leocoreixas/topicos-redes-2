@@ -43,15 +43,15 @@ function Sidebar() {
                             to="/historico"
                         >
                             {({ isActive }) => (       
-                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='book'>Histórico</NavItem>
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='book'>Minhas Corridas</NavItem>
                             )}
 
                         </NavLink>
                         <NavLink
-                            to="/configuracoes"
+                            to="/meus-carros"
                         >
                             {({ isActive }) => (
-                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='cogs'>Configurações</NavItem>
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='car'>Meus Carros</NavItem>
                             )}
 
                         </NavLink>

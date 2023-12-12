@@ -18,7 +18,7 @@ interface CardTypes {
   created_at?: string;
 }
 
-function Configuracoes() {
+function MeusCarros() {
   const cardList: CardTypes[] = [
     {
       id: 1,
@@ -216,4 +216,4 @@ function Configuracoes() {
   );
 }
 
-export default Configuracoes;
+export default MeusCarros;

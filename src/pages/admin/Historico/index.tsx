@@ -8,10 +8,8 @@ function Historico() {
     const LOSER = 100000000000000000
     const getHistorico = async () => {
         const user = localStorage.getItem("address") as string;
-        debugger
         const history = await GetRun(user);
         if(history && history.length > 0){
-            debugger
             const mapHistory = history.map((item: any) => {
                 return {
                     id: item.run_id,

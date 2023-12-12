@@ -1,24 +1,30 @@
 import { useState } from "react";
 import Typography from "../../../components/atoms/Typography";
 import "./index.css";
-import { Button } from "@material-tailwind/react";
+import { Alert, Button } from "@material-tailwind/react";
 import CarCard from "../../../components/molecules/cards/CarCard";
 import { useEffect } from "react";
 import Icon from "../../../components/atoms/icon";
 import playGame from "../../../components/cartesi/playGame";
 import getWinner from "../../../components/cartesi/getWinner";
+import AlertModal from "../../../components/molecules/modals/AlertModal";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [selectedCar, setSelectedCar] = useState<any>(null);
   const [winnerCar, setWinnerCar] = useState<any>(null);
+  const [gameFinished, setGameFinished] = useState(false);
+
+  const navigate = useNavigate();
+
 
   const playGameNow = async () => {
     setLoading(true);
     const user = localStorage.getItem("address") as string;
-    debugger
     const winner = await playGame(
       { car_id_1: selectedCar.id, car_chance_win_1: selectedCar.chance})
+    
     setTimeout(async () => {
       if (winner) {
         await getWinner(user).then((response) => {
@@ -28,12 +34,11 @@ function App() {
           }
         });
       }
-    }, 10000);
-    
+      setGameFinished(true)
+    }, 10000);  
   };
 
   useEffect(() => {
-    debugger;
     const carString = localStorage.getItem("selectedCar");
     const carParsed = carString ? JSON.parse(carString || "") : undefined;
     if (carParsed) {
@@ -110,7 +115,7 @@ function App() {
                   color="gray-800"
                   style={{ marginTop: "10px", marginLeft: "10px" }}
                 >
-                  Nenhum carro selecionado. Vá para as configurações e selecione
+                  Nenhum carro selecionado. Vá para em meus carros e selecione
                   um carro.
                 </Typography>
               )}
@@ -140,6 +145,19 @@ function App() {
             </div>
           </div>
         )}
+        {gameFinished ? (
+          <AlertModal
+            isOpen={gameFinished}
+            toggle={() => setGameFinished(false)}
+            title="Resultado"
+            description={winnerCar ? `Parabéns, você ganhou! Veja os detalhes em Minhas Corridas` : "Infelizmente você perdeu. Veja os detalhes em Minhas Corridas"}
+            confirmButtonText="Minhas Corridas"
+            onConfirm={() => navigate('/historico')}
+            is_loading={false}
+          />  
+        ) : null
+          
+        }
       </body>
     </div>
   );

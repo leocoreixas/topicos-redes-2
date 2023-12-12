@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }: any) => {
         '/jogar': 'Jogar',
         '/retirada': 'Retirada',
         '/historico': 'Historico',
-        '/configuracoes': 'Configuracoes',
+        '/meus-carros': 'Meus Carros',
     };
     const currentRouteName = routeNameObj[location.pathname as keyof typeof routeNameObj];
 

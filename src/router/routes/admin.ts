@@ -34,9 +34,9 @@ const AdminRoutes = [
         layout: DashboardLayout,
     },
     {
-        path: '/configuracoes',
-        basename: 'Configurações',
-        component: lazy(() => import('../../pages/admin/Configuracoes')),
+        path: '/meus-carros',
+        basename: 'Meus Carros',
+        component: lazy(() => import('../../pages/admin/MeusCarros')),
         layout: DashboardLayout,
     },
 ]

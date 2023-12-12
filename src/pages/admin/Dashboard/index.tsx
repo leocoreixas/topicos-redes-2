@@ -9,9 +9,9 @@ function Dashboard() {
     
     const [pagesList, setPagesList] = useState([
         { id: 1, title: 'Comprar Carros', description: 'Essa parte do site é destinada a compra de carros utilizando o Etherium, para isso é necessário estar logada em sua cateira da MetaMask e ter saldo suficiente para a compra do carro desejado.'},
-        { id: 2, title: 'Jogar', description: 'Aqui você jogará o Rally da Sorte, porém, para isso, precisa ter carros para jogar. Você pode comprar carros na aba "Comprar Carros" e depois entrar em Configurações para selecionar o carro que deseja jogar. O jogo ocorre da seguinte maneira: você escolhe um carro'},
+        { id: 2, title: 'Jogar', description: 'Aqui você jogará o Rally da Sorte, porém, para isso, precisa ter carros para jogar. Você pode comprar carros na aba "Comprar Carros" e depois entrar em Meus Carros para selecionar o carro que deseja jogar. O jogo ocorre da seguinte maneira: você escolhe um carro'},
         { id: 3, title: 'Histórico', description: 'Aqui você poderá ver o histórico de jogadas, para isso, basta clicar em "Ver Histórico".'},
-        { id: 4, title: 'Configurações', description: 'Aqui você poderá configurar o carro que deseja jogar, para isso, basta selecionar o carro desejado e clicar em "Selecionar Carro".'},
+        { id: 4, title: 'Meus Carros', description: 'Aqui você poderá configurar o carro que deseja jogar, para isso, basta selecionar o carro desejado na lista'},
     ]);
 
 
