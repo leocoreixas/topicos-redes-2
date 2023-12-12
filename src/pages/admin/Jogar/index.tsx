@@ -34,8 +34,7 @@ function App() {
           }
         });
       }
-      setGameFinished(true)
-    }, 10000);  
+    }, 10000);
   };
 
   useEffect(() => {
@@ -54,12 +53,16 @@ function App() {
             style={{ maxWidth: "150px", marginTop: "20px" }}
           >
             <Typography tag="p" variant="label-md">
-              0.01 ETH
+              0.1 ETH
             </Typography>
             <Icon name="ethereum" />
           </div>
 
-          <Button disabled={!selectedCar} onClick={playGameNow} className="mt-4">
+          <Button
+            disabled={!selectedCar}
+            onClick={playGameNow}
+            className="mt-4"
+          >
             Jogar
           </Button>
         </div>

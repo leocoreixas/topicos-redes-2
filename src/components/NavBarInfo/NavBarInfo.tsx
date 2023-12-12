@@ -3,6 +3,7 @@ import './NavbarInfo.css';
 import AddBalanceWallet from "../cartesi/addBalance";
 import GenerateWithdrawBalanceWallet from "../cartesi/generateVoucher";
 import GetBalance from "../cartesi/getBalance";
+import GetVoucher from "../cartesi/getVoucher";
 import AddBalanceDialog from "./AddBalance";
 import GenerateWithdrawDialog from "./GenerateWithDrawBalance";
 import WithdrawDialog from "./WithDrawBalance";
@@ -72,10 +73,6 @@ const NavBarInfo = () => {
         setConfirmOpen(true);
     };
 
-    const handleAnchorClick = (event:any) => {
-        setAnchorEl(event.currentTarget);
-    };
-
     const handleAnchorClose = () => {
         setAnchorEl(null);
     };
@@ -113,6 +110,7 @@ const NavBarInfo = () => {
                 alert("Please enter a valid number.");
                 return;
             }
+            debugger
             setIsAddingBalance(true);
             if (Number(balance) < Number(newBalanceInput)) {
                 alert("You don't have balance to generate voucher.");
@@ -149,6 +147,10 @@ const NavBarInfo = () => {
         const balance = await GetBalance(user as string);
         setBalance(balance);
         localStorage.setItem('balance', balance?.toString());
+        const voucher = await GetVoucher(user as string);
+        debugger
+        setVoucher(voucher);
+        localStorage.setItem('voucher', voucher?.toString());
     }
 
 
@@ -157,6 +159,9 @@ const NavBarInfo = () => {
         const balance = await GetBalance(user as string);
         setBalance(balance);
         localStorage.setItem('balance', balance?.toString());
+        const voucher = await GetVoucher(user as string);
+        setVoucher(voucher);
+        localStorage.setItem('voucher', voucher?.toString());
     };
 
     useEffect(() => {
@@ -186,7 +191,7 @@ const NavBarInfo = () => {
                 <nav className="navbar-info">
                     <h1 className="navbar-info-logo">
                         <Button color="blue" style={ {marginRight: "30px"}} onClick={refreshBalance}>refresh Balance</Button>
-                        <span className="navbar-logo-text mr-5">Balance: {balance} ETH</span>
+                        <span className="navbar-logo-text mr-5">Balance: {balance} RALLY TOKEN</span>
                         <span className="navbar-logo-text mr-5">For withdraw: {voucher} ETH</span>
 
                         <Menu placement="bottom-end">
