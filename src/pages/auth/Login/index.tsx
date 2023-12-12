@@ -22,6 +22,8 @@ const Login = () => {
         localStorage.setItem("address", accounts[0]);
         setAccount(accounts[0]);
         navigate("/dashboard");
+      } else {
+        alert("Você precisa conectar sua carteira Metamask");
       }
     }
   };
