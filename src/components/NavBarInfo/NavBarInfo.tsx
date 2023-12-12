@@ -110,7 +110,6 @@ const NavBarInfo = () => {
                 alert("Please enter a valid number.");
                 return;
             }
-            debugger
             setIsAddingBalance(true);
             if (Number(balance) < Number(newBalanceInput)) {
                 alert("You don't have balance to generate voucher.");
@@ -148,7 +147,6 @@ const NavBarInfo = () => {
         setBalance(balance);
         localStorage.setItem('balance', balance?.toString());
         const voucher = await GetVoucher(user as string);
-        debugger
         setVoucher(voucher);
         localStorage.setItem('voucher', voucher?.toString());
     }
@@ -191,8 +189,8 @@ const NavBarInfo = () => {
                 <nav className="navbar-info">
                     <h1 className="navbar-info-logo">
                         <Button color="blue" style={ {marginRight: "30px"}} onClick={refreshBalance}>refresh Balance</Button>
-                        <span className="navbar-logo-text mr-5">Balance: {balance} RALLY TOKEN</span>
-                        <span className="navbar-logo-text mr-5">For withdraw: {voucher} ETH</span>
+                        <span className="navbar-logo-text mr-5">Saldo: {balance} RALLY TOKEN</span>
+                        <span className="navbar-logo-text mr-5">Para sacar: {voucher} ETH</span>
 
                         <Menu placement="bottom-end">
                             <MenuHandler>

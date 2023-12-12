@@ -188,22 +188,13 @@ function Comprar() {
         <BaseModal
           isOpen={winner !== null}
           toggle={() => setWinner(null)}
-          title="Parabéns! Você ganhou:"
+          title="Parabéns! Você ganhou um novo carro!"
           confirmButtonText="Confirmar"
           onConfirm={() => setWinner(null)}
         >
           <>
-          {winner !== null ? (
-            <CarCard
-              title={winner.title}
-              strength={winner.strength}
-              speed={winner.speed}
-              image={winner.image}
-              rarity={winner.rarity}
-            />
-          ) : undefined}
           <Typography className="mt-4" tag="p" variant="label-md">
-            Veja seus carros na aba "Meus Carros"
+            Para ver seu carro, acesse a aba "Garagem"
           </Typography>
           </>
          

@@ -19,7 +19,7 @@ function Sidebar() {
                             to="/dashboard"
                         >
                             {({ isActive }) => (
-                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='dashboard'>Dashboard</NavItem>
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='dashboard'>Home</NavItem>
                             )}
 
                         </NavLink>
@@ -51,7 +51,7 @@ function Sidebar() {
                             to="/meus-carros"
                         >
                             {({ isActive }) => (
-                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='car'>Meus Carros</NavItem>
+                                <NavItem color={isActive ? 'secondary-m' : 'gray-400'} icon='car'>Garagem</NavItem>
                             )}
 
                         </NavLink>

@@ -5,7 +5,7 @@ import DashboardLayout from '../../components/templates/DashboardLayout'
 const AdminRoutes = [
     {
         path: '/dashboard',
-        basename: 'Dashboard',
+        basename: 'Home',
         component: lazy(() => import('../../pages/admin/Dashboard')),
         layout: DashboardLayout,
     },
@@ -35,7 +35,7 @@ const AdminRoutes = [
     },
     {
         path: '/meus-carros',
-        basename: 'Meus Carros',
+        basename: 'Garagem',
         component: lazy(() => import('../../pages/admin/MeusCarros')),
         layout: DashboardLayout,
     },

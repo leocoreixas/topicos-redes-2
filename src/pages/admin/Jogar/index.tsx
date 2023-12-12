@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Typography from "../../../components/atoms/Typography";
 import "./index.css";
-import { Alert, Button } from "@material-tailwind/react";
+import  Button  from "../../../components/atoms/buttons/BaseBtn/index";
+import { Alert } from "@material-tailwind/react";
 import CarCard from "../../../components/molecules/cards/CarCard";
 import { useEffect } from "react";
 import Icon from "../../../components/atoms/icon";
@@ -9,9 +10,10 @@ import playGame from "../../../components/cartesi/playGame";
 import getWinner from "../../../components/cartesi/getWinner";
 import AlertModal from "../../../components/molecules/modals/AlertModal";
 import { useNavigate } from "react-router-dom";
+import getBalance from "../../../components/cartesi/getBalance";
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedCar, setSelectedCar] = useState<any>(null);
   const [winnerCar, setWinnerCar] = useState<any>(null);
   const [gameFinished, setGameFinished] = useState(false);
@@ -20,11 +22,15 @@ function App() {
 
 
   const playGameNow = async () => {
-    setLoading(true);
     const user = localStorage.getItem("address") as string;
+    const balance = await getBalance(user);
+    if (balance < 100000000000000000) {
+      alert("Você não possui saldo suficiente para jogar. Compre mais tokens");
+      return;
+    }
     const winner = await playGame(
       { car_id_1: selectedCar.id, car_chance_win_1: selectedCar.chance})
-    
+    setLoading(true);
     setTimeout(async () => {
       if (winner) {
         await getWinner(user).then((response) => {
@@ -34,7 +40,8 @@ function App() {
           }
         });
       }
-    }, 10000);
+      setGameFinished(true);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -59,14 +66,15 @@ function App() {
           </div>
 
           <Button
-            disabled={!selectedCar}
+            disabled={loading}
+            isLoading={loading}
             onClick={playGameNow}
             className="mt-4"
           >
             Jogar
           </Button>
         </div>
-        {loading ? (
+        {!loading ? (
           <div className="first-collunm">
             <div className="hero">
               <div className="highway">
@@ -118,7 +126,7 @@ function App() {
                   color="gray-800"
                   style={{ marginTop: "10px", marginLeft: "10px" }}
                 >
-                  Nenhum carro selecionado. Vá para em meus carros e selecione
+                  Nenhum carro selecionado. Vá para em Garagem e selecione
                   um carro.
                 </Typography>
               )}
@@ -153,7 +161,7 @@ function App() {
             isOpen={gameFinished}
             toggle={() => setGameFinished(false)}
             title="Resultado"
-            description={winnerCar ? `Parabéns, você ganhou! Veja os detalhes em Minhas Corridas` : "Infelizmente você perdeu. Veja os detalhes em Minhas Corridas"}
+            description={'Veja os detalhes da sua corrida no histórico, em "Minhas corridas!"'}
             confirmButtonText="Minhas Corridas"
             onConfirm={() => navigate('/historico')}
             is_loading={false}

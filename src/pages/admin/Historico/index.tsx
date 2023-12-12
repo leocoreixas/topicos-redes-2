@@ -2,6 +2,7 @@ import { useState } from "react";
 import HistoricCard from "../../../components/molecules/cards/HistoricCard";
 import GetRun from "../../../components/cartesi/GetRun";
 import { useEffect } from "react";
+import  Typography  from "../../../components/atoms/Typography";
 function Historico() {
 
     const [historico, setHistorico] = useState([]);
@@ -31,9 +32,10 @@ function Historico() {
     return (
         <>
             <div className="px-4">
-                {historico ? historico.map((item: any) => (
+                {historico.length > 0 ? historico.map((item: any) => (
                     <HistoricCard key={item.id} className="mt-10 mr-20 ml-20" createdAt={item.created_at} car={item.car} value={item.value} status={item.status}/>
-                )) : null
+                )) : <Typography className="text-2xl font-bold mb-4 mt-3 ml-3" align="center"  variant="h4" tag={'symbol'}>Você ainda não jogou!</Typography>
+                
                 }
             </div>
         </>

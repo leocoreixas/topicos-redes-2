@@ -23,10 +23,10 @@ const GenerateWithdrawDialog = ({
       open={open}
       handler={handleClose}
     >
-      <DialogHeader>Generate Balance to Withdraw</DialogHeader>
+      <DialogHeader>Voucher que deseja gerar</DialogHeader>
       <DialogBody>
         <Typography tag={"p"} variant={"body-lg"} className="mb-4">
-          Enter the amount in Ethereum to discount from your balance:
+          Adicione o valor que deseja gerar:
         </Typography>
         <TextInput
           label="Amount"
@@ -42,14 +42,14 @@ const GenerateWithdrawDialog = ({
           onClick={handleClose}
           className="mr-4"
         >
-          Cancel
+          Cancelar
         </BaseBtn>
         <BaseBtn
           color="primary"
           onClick={handleWithdrawBalance}
           className="mr-4"
         >
-          Confirm
+          Confirmar
         </BaseBtn>
       
       </DialogFooter>

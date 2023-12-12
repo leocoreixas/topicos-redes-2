@@ -25,10 +25,10 @@ const AddBalanceDialog =  (
       open={open}
       handler={handleClose}
     >
-      <DialogHeader>Add Balance</DialogHeader>
+      <DialogHeader>Adicionar Saldo</DialogHeader>
       <DialogBody>
         <TextInput
-          label="Amount"
+          label="Saldo a adicionar"
           type="number"
           value={newBalanceInput}
           onChange={handleInputChange}

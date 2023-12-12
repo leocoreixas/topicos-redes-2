@@ -9,7 +9,6 @@ const VITE_LOCALHOST_INPUTBOX_ADDRESS = import.meta.env.VITE_LOCALHOST_INPUTBOX_
 async function GenerateWithDrawWallet(balance : string) {
     try {
         const localStorareUser = localStorage.getItem('address') || '';
-        debugger
         let web3 = new Web3((window as any).ethereum)
         balance = balance ? balance?.toString() : '0';
         const inputContract = new web3.eth.Contract(IInputBox__factory.abi, VITE_LOCALHOST_INPUTBOX_ADDRESS);

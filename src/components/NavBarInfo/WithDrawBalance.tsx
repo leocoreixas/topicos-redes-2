@@ -8,6 +8,8 @@ import {
 
 import BaseBtn from "../atoms/buttons/BaseBtn";
 import Typography from "../atoms/Typography";
+import { useVouchersQuery, useVoucherQuery } from "../cartesi/helpers/generated/index";
+import { useRollups } from "../helpers/useRollups";
 
 const WithdrawDialog = ({
   open,
@@ -20,21 +22,21 @@ const WithdrawDialog = ({
   openVoucherList
 }) => {
   const dappAddress = import.meta.env.NEXT_PUBLIC_LOCALHOST_DAPP_ADDRESS;
-
+  const [balanceInput, setBalanceInput] = useState("");
+  const [vouchers, setVouchers] = useState([]);
   const handleInputChange = (e) => {
     const newValue = e.target.value;
     onNewBalanceInputChange(newValue); 
   };
-
   return (
     <Dialog
       open={open}
       handler={handleClose}
     >
-      <DialogHeader>Withdraw Balance</DialogHeader>
+      <DialogHeader>Withdraw</DialogHeader>
       <DialogBody>
       <Typography tag={"p"} variant={"body-lg"} className="mb-4">
-          You are about to withdraw {newBalanceInput} ETH from your balance.
+          Vouchers disponíveis para executar:
         </Typography>
       </DialogBody>
       <DialogFooter>

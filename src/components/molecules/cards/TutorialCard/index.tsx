@@ -13,13 +13,13 @@ function TutorialCard(props: IProps) {
     return (
         <>
             <div className={classNames(
-                    'p-8 rounded-2xl border border-gray-200 flex flex-col gap-2 bg-secondary-l',
+                    'p-8 rounded-2xl border border-gray-200 flex flex-col gap-2 bg-primary-l w-[350px]',
                     className
                 )}>
                 <div>
-                    <Typography className="text-lg font-bold mb-2" color='secondary-m' variant="h5" tag={'symbol'}>{title}</Typography>
+                    <Typography className="text-lg font-bold mb-2" color='primary-m' variant="h6" tag={'symbol'}>{title}</Typography>
                 </div>
-                <Typography className="text-sm font-light" variant="h6" tag={'symbol'}>{description}</Typography>
+                <Typography className="text-sm font-light" variant="label-lg" tag={'symbol'}>{description}</Typography>
             </div>
            
         </>

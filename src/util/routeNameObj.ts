@@ -1,10 +1,10 @@
 const routeNameObj = {
-    '/dashboard': 'Dashboard',
+    '/dashboard': 'Home',
     '/comprar': 'Comprar Carros',
     '/jogar': 'Jogar',
     '/retirada': 'Retirada',
     '/historico': 'Histórico',
-    '/meus-carros': 'Meus Carros',
+    '/meus-carros': 'Garagem',
     };
 
 export default routeNameObj;

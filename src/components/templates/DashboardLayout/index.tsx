@@ -9,12 +9,12 @@ const DashboardLayout = ({ children }: any) => {
     const location = useLocation();
     // const history = useHistory();
     const routeNameObj = {
-        '/dashboard': 'Dashboard',
+        '/dashboard': 'Home',
         '/comprar': 'Comprar Carros',
         '/jogar': 'Jogar',
         '/retirada': 'Retirada',
-        '/historico': 'Historico',
-        '/meus-carros': 'Meus Carros',
+        '/historico': 'Minhas Corridas',
+        '/meus-carros': 'Garagem',
     };
     const currentRouteName = routeNameObj[location.pathname as keyof typeof routeNameObj];
 
