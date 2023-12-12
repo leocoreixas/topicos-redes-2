@@ -13,7 +13,10 @@
   "dependencies": {
     "@cartesi/rollups": "^1.1.0",
     "@material-tailwind/react": "^2.1.5",
+    "@web3-onboard/injected-wallets": "^2.10.10",
     "@web3-onboard/react": "^2.8.13",
+    "@web3-onboard/trezor": "^2.4.3",
+    "@web3-onboard/walletlink": "^2.1.7",
     "axios": "^1.6.2",
     "classnames": "^2.3.2",
     "dotenv": "^16.3.1",
