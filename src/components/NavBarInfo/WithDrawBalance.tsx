@@ -10,6 +10,7 @@ import BaseBtn from "../atoms/buttons/BaseBtn";
 import Typography from "../atoms/Typography";
 import { useVouchersQuery, useVoucherQuery } from "../cartesi/helpers/generated/index";
 import { useRollups } from "../helpers/useRollups";
+import { Vouchers } from "../cartesi/withdraw";
 
 const WithdrawDialog = ({
   open,
@@ -38,6 +39,7 @@ const WithdrawDialog = ({
       <Typography tag={"p"} variant={"body-lg"} className="mb-4">
           Vouchers disponíveis para executar:
         </Typography>
+        
       </DialogBody>
       <DialogFooter>
         <BaseBtn
@@ -47,13 +49,7 @@ const WithdrawDialog = ({
         >
           Cancel
         </BaseBtn>
-        <BaseBtn
-          color="primary"
-          onClick={openVoucherList}
-          className="mr-4"
-        >
-          Confirm
-        </BaseBtn>
+        <Vouchers />
       
       </DialogFooter>
     </Dialog>
