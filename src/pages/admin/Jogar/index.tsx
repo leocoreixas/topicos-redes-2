@@ -22,6 +22,7 @@ function App() {
 
 
   const playGameNow = async () => {
+    setLoading(true)
     const user = localStorage.getItem("address") as string;
     const balance = await getBalance(user);
     if (balance < 100000000000000000) {
@@ -43,6 +44,7 @@ function App() {
       setGameFinished(true);
     }, 4000);
   };
+  
 
   useEffect(() => {
     const carString = localStorage.getItem("selectedCar");
@@ -66,7 +68,7 @@ function App() {
           </div>
 
           <Button
-            disabled={loading}
+            disabled={!selectedCar || loading}
             isLoading={loading}
             onClick={playGameNow}
             className="mt-4"
@@ -154,7 +156,16 @@ function App() {
                 </div>
               </div>
             </div>
+            <Typography
+              tag="p"
+              variant="h1"
+              className="relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center"
+            > Realizando jogo...
+            </Typography>
+
           </div>
+          
+          
         )}
         {gameFinished ? (
           <AlertModal
